@@ -1,0 +1,17 @@
+Modern C++ Programming with Test Driven Development by Jeff Langr.
+============
+
+
+ * Soundex
+ * Place Description Service
+
+
+
+Place Description Service
+-----------
+
+Requirements:
+ * libcurl
+ * jsoncpp
+
+ 
