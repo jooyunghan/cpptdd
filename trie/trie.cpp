@@ -21,6 +21,17 @@ public:
 	int& operator[](const string& s) {
 		return get(s.c_str());
 	}
+	template <typename F>
+	void foreach(F f) {
+		foreach("", f);
+	}
+	template <typename F>
+	void foreach(string prefix, F f) {
+		if (count > 0) f(prefix, count);
+		for_each(begin(children), end(children), [&](pair<char, trie> p) {
+			p.second.foreach(prefix + p.first, f);
+		});
+	}
 };
 
 string normalize(string s) {
@@ -32,15 +43,18 @@ string normalize(string s) {
 	return string(begin(s), out);
 }
 
+typedef istream_iterator<string> isit;
+
 int main() {
 	trie root;
-	for (istream_iterator<string> word(cin), end; word != end; word++) {
-		auto w = normalize(*word);
-		if (w.size() > 0) {
-			root[w]++;
+	for_each(isit(cin), isit(), [&](const string &w) {
+		auto n = normalize(w);
+		if (n.size() > 1) {
+			root[n]++;
 		}
-	}
+	});
 	cout <<  root["steve"] << endl;
+	root.foreach([](string s, int count){ cout << s << ":" << count << endl; });
 	return 0;
 }
 
