@@ -2,10 +2,12 @@ Build and run
 ========
 
     gcc driver.c normalizer.c bstree.c -o bstree
-    gcc driver.c normalizer.c trie.c -o trie
-    
     time ./bstree < encyclopedia.txt
+
+    gcc driver.c normalizer.c trie.c -o trie
     time ./trie < encyclopedia.txt
+
+    awk -f freq.awk encyclopedia.txt
 
 Sample Run
 ========
